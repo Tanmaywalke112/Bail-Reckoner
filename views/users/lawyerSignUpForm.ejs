@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawyer Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            border: 2px solid #333; /* Add border around container */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto;
+            position: relative; /* For positioning the inner border */
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid black;
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #007bff;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #ffffff;
+            display: inline-block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            padding: 15px;
+            border: 1px solid #ced4da;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .invalid-feedback {
+            display: block;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4">Lawyer Details</h2>
+        <form id="lawyerForm" action="/submit-lawyer" method="POST">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+                <div class="invalid-feedback">
+                    Name is required.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="educationStatus">Education Status</label>
+                <input type="text" class="form-control" id="educationStatus" name="educationStatus" required>
+                <div class="invalid-feedback">
+                    Education status is required.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Experience (years)</label>
+                <input type="number" class="form-control" id="experience" name="experience" required min="0">
+                <div class="invalid-feedback">
+                    Experience is required and must be a non-negative number.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="specialty">Specialty</label>
+                <input type="text" class="form-control" id="specialty" name="specialty" required placeholder="Comma separated values">
+                <div class="invalid-feedback">
+                    Specialty is required.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" id="age" name="age" required min="0" max="150">
+                <div class="invalid-feedback">
+                    Age is required and must be a valid number between 0 and 150.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" required pattern="\d{10}" title="Phone number should be exactly 10 digits">
+                <div class="invalid-feedback">
+                    Please enter a valid phone number (10 digits).
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" name="address" required>
+                <div class="invalid-feedback">
+                    Address is required.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="availabilityStatus">Availability Status</label>
+                <select class="form-control" id="availabilityStatus" name="availabilityStatus" required>
+                    <option value="">Select...</option>
+                    <option value="Available">Available</option>
+                    <option value="Unavailable">Unavailable</option>
+                </select>
+                <div class="invalid-feedback">
+                    Availability status is required.
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Bootstrap custom validation
+        (function () {
+            'use strict'
+            var form = document.getElementById('lawyerForm')
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })()
+    </script>
+</body>
+</html>

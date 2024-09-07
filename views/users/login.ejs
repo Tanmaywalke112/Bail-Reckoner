@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to right, #d4e1f1, #a8c0e8);
+            animation: backgroundChange 8s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        @keyframes backgroundChange {
+            0% {
+                background: linear-gradient(to right, #d4e1f1, #a8c0e8);
+            }
+            25% {
+                background: linear-gradient(to right, #a8c0e8, #d4e1f1);
+            }
+            50% {
+                background: linear-gradient(to right, #d4e1f1, #a8c0e8);
+            }
+            75% {
+                background: linear-gradient(to right, #a8c0e8, #d4e1f1);
+            }
+            100% {
+                background: linear-gradient(to right, #d4e1f1, #a8c0e8);
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-family: "Arial", sans-serif;
+            font-weight: bold;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.7);
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .role-options {
+            display: none;
+        }
+
+        .role-options.active {
+            display: block;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(45deg, #d4e1f1, #a8c0e8);
+            border: 2px solid black;
+            color: black;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #a8c0e8, #d4e1f1);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form action="/login" method="POST">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="role">I am a:</label>
+            <select id="role" name="role" required>
+                <option value="" disabled selected>Select Role</option>
+                <option value="convict">Convict</option>
+                <option value="legal_aid_provider">Legal Aid Provider</option>
+            </select>
+
+            <div class="role-options" id="legalAidOptions">
+                <label for="legalAidRole">Legal Aid Provider Role</label>
+                <select id="legalAidRole" name="legalAidRole">
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="lawyer">Lawyer</option>
+                    <option value="judge">Judge</option>
+                    <option value="stenographer">Stenographer</option>
+                    <option value="prosecutor">Prosecutor</option>
+                    <option value="supervisor">Supervisor</option>
+                </select>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('role').addEventListener('change', function() {
+            var legalAidOptions = document.getElementById('legalAidOptions');
+            if (this.value === 'legal_aid_provider') {
+                legalAidOptions.classList.add('active');
+            } else {
+                legalAidOptions.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
