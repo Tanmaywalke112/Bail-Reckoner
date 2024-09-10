@@ -4,7 +4,7 @@ from langchain_groq import ChatGroq
 # Initialize the LLM model
 llm = ChatGroq(
     temperature=0, 
-    groq_api_key='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', 
+    groq_api_key='YOUR_API_KEY', 
     model_name="llama-3.1-70b-versatile"
 )
 
