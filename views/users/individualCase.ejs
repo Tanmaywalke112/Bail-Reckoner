@@ -164,11 +164,24 @@
                 <p><strong>Defendant:</strong> <%= case1.defendant %></p>
 
                 <!-- Lawyers Section -->
-                <div class="section section-lawyers">
-                    <h4>Lawyers</h4>
-                    <p><strong>Lawyer 1:</strong> <%= case1.lawyer1.map(lawyer => lawyer.name).join(', ') %></p>
-                    <p><strong>Lawyer 2:</strong> <%= case1.lawyer2.map(lawyer => lawyer.name).join(', ') %></p>
-                </div>
+<div class="section section-lawyers">
+    <h4>Lawyers</h4>
+    <p><strong>Lawyer 1:</strong>
+        <% for (let i = 0; i < case1.lawyer1.length; i++) { %>
+            <a href="/lawyerProfile/<%= case1.lawyer1[i]._id %>" target="_blank"><%= case1.lawyer1[i].name %></a>
+            <% if (i < case1.lawyer1.length - 1) { %>, <% } %>
+        <% } %>
+    </p>
+    <p><strong>Lawyer 2:</strong>
+        <% for (let i = 0; i < case1.lawyer2.length; i++) { %>
+            <a href="/lawyerProfile/<%= case1.lawyer2[i]._id %>" target="_blank"><%= case1.lawyer2[i].name %></a>
+            <% if (i < case1.lawyer2.length - 1) { %>, <% } %>
+        <% } %>
+    </p>
+</div>
+
+                
+                
 
                 <!-- Appeals Section -->
                 <div class="section section-appeals">
@@ -217,7 +230,7 @@
                 <p><strong>Signed:</strong> <%= case1.signed %></p>
             </div>
         </div>
-        <a href="javascript:history.back()" class="btn btn-primary mt-4">Back to All Cases</a>
+        <a href="javascript:history.back()" class="btn btn-primary mt-4">Back</a>
 
     </div>
 </body>

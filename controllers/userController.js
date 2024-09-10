@@ -127,6 +127,12 @@ module.exports.handleCaseSubmit = async (req, res) => {
     }
 };
 
+module.exports.viewLawyerProfile = async(req,res)=>{
+    let {id} = req.params;
+    let lawyer = await Lawyer.findById(id);
+    res.render("users/lawyerPublicProfile.ejs",{lawyer});
+}
+
 
 module.exports.viewAllCases = async(req,res)=>{
     const cases = await Case.find({})
@@ -211,7 +217,11 @@ module.exports.handleChargeSheet = async (req, res) => {
         convictObj.chargeSheet = chargeSheetObj._id;
         await convictObj.save();
 
-        res.redirect("/");
+
+        let id = req.user._id;
+        let prosecutor2 = await Prosecutor.findById(id);
+
+        res.render("users/prosecutorProfile.ejs",{prosecutor:prosecutor2});
     } catch (err) {
         console.error("Error in handling charge sheet: ", err);
         res.status(500).send("An error occurred while processing the charge sheet.");

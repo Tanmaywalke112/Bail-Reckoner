@@ -42,7 +42,9 @@ router.post("/file-chargesheet", upload.array('evidence[]', 10),wrapAsync(userCo
 
 router.get("/allcases",wrapAsync(userController.viewAllCases));
 router.get("/case",(req,res)=>{res.render("users/caseDetailsForm.ejs")});
-router.post("/cases",userController.handleCaseSubmit)
+router.post("/cases",userController.handleCaseSubmit);
+
+router.get("/lawyerProfile/:id",wrapAsync(userController.viewLawyerProfile));
 
 
 

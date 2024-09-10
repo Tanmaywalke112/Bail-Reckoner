@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= lawyer.name %> - Profile</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS file -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap CSS -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #f4f4f4, #e0e0e0);
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: linear-gradient(to right, #333, #555);
+            color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #00bcd4;
+            transform: scale(1.05);
+        }
+
+        .profile-header, .contact-info {
+            background: #fff;
+            padding: 30px;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 800px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .profile-header h1, .contact-info h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 32px;
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 10px;
+        }
+
+        .profile-header p, .contact-info p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .contact-info a {
+            text-decoration: none;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <!-- Add other links if necessary -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="profile" class="profile-header">
+            <h1><%= lawyer.name %></h1>
+            <p><strong>Role:</strong> <%= lawyer.role %></p>
+            <p><strong>Age:</strong> <%= lawyer.age %></p>
+            <p><strong>Education:</strong> <%= lawyer.educationStatus %></p>
+            <p><strong>Experience:</strong> <%= lawyer.experience %> years</p>
+            <p><strong>Specialty:</strong> <%= lawyer.specialty.join(', ') %></p>
+            <p><strong>Status:</strong> <%= lawyer.availabilityStatus %></p>
+        </section>
+
+        <section id="contact" class="contact-info">
+            <h2>Contact Details</h2>
+            <p><strong>Phone:</strong> <%= lawyer.contactDetails.phone %></p>
+            <p><strong>Email:</strong> <a href="mailto:<%= lawyer.contactDetails.email %>"><%= lawyer.contactDetails.email %></a></p>
+            <p><strong>Address:</strong> <%= lawyer.contactDetails.address %></p>
+            <%if(lawyer.availabilityStatus == 'Available'){%>
+            <a href="mailto:<%= lawyer.contactDetails.email %>" class="btn btn-outline-primary">Request Case</a>
+            <%}%>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
