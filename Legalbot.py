@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 # Initialize the LLM model
 llm = ChatGroq(
     temperature=0, 
-    groq_api_key='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', 
+    groq_api_key='YOUR_API_KEY', 
     model_name="llama-3.1-70b-versatile"
 )
 
